@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Cogito</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/styleIndex.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Peta:wght@400;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="site-wrap">
+        <header>
+            <nav class="nav" aria-label="Principal">
+                <a href="/" class="logo" aria-label="Página inicial">
+                    <span>C</span><span>o</span><span>g</span><span>i</span><span>t</span><span class="underline-o">o</span><span class="highlight-apostrophe">'</span>
+                </a>
+
+                <div class="grow"></div>
+                <div class="nav-links">
+                    <a class="pill" href="/postagensacademicas">Posts Acadêmicos</a>
+                    <a class="pill" href="/pagtcc">TCC</a>
+                    {% if user %}
+                    <a class="pill" href="/perfil">Perfil</a>
+                    <a class="btn btn-brand" href="/logout">Sair</a>
+                    {% else %}
+                    <a class="btn btn-brand" href="/cadastro">Cadastrar-se</a>
+                    <a class="btn btn-brand" href="/login">Login</a>
+                    {% endif %}
+                </div>
+            </nav>
+        </header>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="flash-messages">
+            {% for category, message in messages %}
+            <div class="flash-message {{ category }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        <main>
+            <section class="hero">
+                <div>
+                    <h1>{% if user %}Bem-vindo(a), {{ user.username }}!{% else %}Cogito, quem disse cientista?{% endif %}</h1>
+                    <p>{% if user %}Explore nossa plataforma acadêmica e descubra recursos para impulsionar seus estudos e pesquisas.{% else %}Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias in nemo officia architecto! Explicabo cumque facilis magnam officia, libero suscipit commodi odit animi labore hic aperiam et, unde rem debitis?{% endif %}</p>
+                    <div class="hero-cta">
+                        {% if user %}
+                        <a class="btn btn-brand" href="/postagensacademicas">Ver Postagens</a>
+                        <a class="btn btn-ghost" href="/pagtcc">Acessar TCC</a>
+                        {% else %}
+                        <a class="btn btn-brand" href="#acesso">Acessar plataforma</a>
+                        <a class="btn btn-ghost" href="#tccs">Explorar recursos</a>
+                        {% endif %}
+                    </div>
+
+                    <div class="statbar" role="list">
+                        <div class="stat" role="listitem"><b>+2.5M</b><span>atividades entregues</span></div>
+                        <div class="stat" role="listitem"><b>99.9%</b><span>uptime nos últimos 12 meses</span></div>
+                        <div class="stat" role="listitem"><b>LGPD</b><span>conformidade e segurança</span></div>
+                    </div>
+                </div>
+
+                {% if not user %}
+                <div class="card login" id="acesso" aria-labelledby="titulo-login">
+                    <h2 id="titulo-login">Entre na sua conta</h2>
+                    <p>Acesse com seu e-mail institucional ou usuário da escola.</p>
+                    <form class="form" action="{{ url_for('login') }}" method="post" aria-label="Formulário de login">
+                        <label class="label" for="user">E-mail ou usuário</label>
+                        <input class="input" id="user" name="user" type="text" autocomplete="username"
+                            placeholder="nome@escola.edu.br" required>
+                        <label class="label" for="pass">Senha</label>
+                        <input class="input" id="pass" name="pass" type="password" autocomplete="current-password"
+                            placeholder="••••••••" required>
+                        <div class="form-actions">
+                            <a class="link" href="#">Esqueci minha senha</a>
+                            <button class="btn btn-brand" type="submit">Entrar</button>
+                        </div>
+                        <div style="text-align: center; margin-top: 15px;">
+                            <a class="link" href="{{ url_for('cadastro') }}">Não tem uma conta? Cadastre-se!</a>
+                        </div>
+                    </form>
+                </div>
+                {% else %}
+                <div class="card login" id="acesso" aria-labelledby="titulo-perfil">
+                    <h2 id="titulo-perfil">Seu Perfil</h2>
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <div style="font-size: 60px;">{{ user.avatar }}</div>
+                        <h3>{{ user.username }}</h3>
+                        <p>{{ user.email }}</p>
+                        <p>{{ user.escolaridade }}</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <a class="btn btn-brand" href="/perfil">Ver Perfil Completo</a>
+                    </div>
+                </div>
+                {% endif %}
+            </section>
+
+            <!-- TCC's -->
+            <section id="tccs">
+                <div class="container">
+                    <h2 style="text-align: center; margin-bottom: 30px;">Recursos Acadêmicos</h2>
+                    <div class="grid-3">
+                        <article class="card">
+                            <h3>📚 Postagens Acadêmicas</h3>
+                            <p>Explore artigos, pesquisas e materiais acadêmicos compartilhados pela comunidade.</p>
+                            <a href="/postagensacademicas" class="btn btn-brand mt-30">Acessar</a>
+                        </article>
+                        <article class="card">
+                            <h3>📝 Trabalhos de Conclusão</h3>
+                            <p>Encontre e compartilhe TCCs, monografias e projetos de pesquisa de diversas áreas.</p>
+                            <a href="/pagtcc" class="btn btn-brand mt-30">Acessar</a>
+                        </article>
+                        <article class="card">
+                            <h3>👤 {% if user %}Seu Perfil{% else %}Perfil Acadêmico{% endif %}</h3>
+                            <p>{% if user %}Gerencie suas informações pessoais, histórico acadêmico e preferências de conta.{% else %}Crie e personalize seu perfil acadêmico para conectar-se com outros pesquisadores.{% endif %}</p>
+                            <a href="{% if user %}/perfil{% else %}/cadastro{% endif %}" class="btn btn-brand mt-30">{% if user %}Acessar{% else %}Criar{% endif %}</a>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Mestrado -->
+            <section id="mestrado">
+                <div class="container grid-2" style="align-items:center">
+                    <div>
+                        <h2>Aprenda no seu ritmo</h2>
+                        <p class="muted">Crie hábitos de estudo com metas semanais, notificações de pendências e relatórios de
+                            desempenho por disciplina.</p>
+                        <ul>
+                            <li>Gamificação leve para motivar a prática</li>
+                            <li>Aplicativo amigável em dispositivos móveis</li>
+                            <li>Suporte offline para atividades</li>
+                        </ul>
+                    </div>
+                    <div class="illus">
+                        <div class="blob a"></div>
+                        <div class="blob b"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- IC's -->
+            <section id="ics">
+                <div class="container">
+                    <div class="card" style="display:grid; grid-template-columns: 1.2fr 1fr; gap:18px; align-items:center">
+                        <div>
+                            <h2>Gestão pedagógica integrada</h2>
+                            <p>Indicadores de aprendizagem, frequência, tarefas e participação em um só lugar, com exportação e
+                                integrações.</p>
+                            <div style="display:flex; gap:12px; margin-top:10px">
+                                <a class="btn btn-brand" href="#demo">Falar com time pedagógico</a>
+                                <a class="btn btn-ghost" href="#">Ver integrações</a>
+                            </div>
+                        </div>
+                        <div class="illus">
+                            <div class="blob a" style="left:auto; right:-30px; top:-10px"></div>
+                            <div class="blob b" style="left:-40px; bottom:-20px"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Doutorado -->
+            <section id="doutorado">
+                <div class="container">
+                    <h2>Contato</h2>
+                    <p>Entre em contato conosco para tirar dúvidas ou solicitar informações sobre programas avançados.</p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="foot">
+                <div>
+                    <a href="/" class="logo" aria-label="Página inicial">
+                        <span>C</span><span>O</span><span>G</span><span>I</span><span>T</span><span
+                            style="color:var(--highlight)">'</span><span style="color:var(--highlight)">O</span>
+                    </a>
+                    <small>© <span id="year"></span> Cogito. Todos os direitos reservados.</small>
+                </div>
+                <div>
+                    <h4>Produto</h4>
+                    <a href="/postagensacademicas">Postagens Acadêmicas</a>
+                    <a href="/pagtcc">TCC's</a>
+                    <a href="/perfil">Perfil</a>
+                </div>
+                <div>
+                    <h4>Institucional</h4>
+                    <a href="#">Sobre</a>
+                    <a href="#">Carreiras</a>
+                    <a href="#">Privacidade</a>
+                </div>
+                <div>
+                    <h4>Suporte</h4>
+                    <a href="#">Central de ajuda</a>
+                    <a href="#">Status</a>
+                    <a href="#">Contato</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script>
+        // Atualiza ano no rodapé
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+
+</html>

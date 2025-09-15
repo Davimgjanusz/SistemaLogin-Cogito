@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil | Cogito</title>
+    <link rel="stylesheet" href="static/style/perfil/styleEditarPerfil.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Peta:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/perfil/styleEditarPerfil.css') }}">
+    <link rel="stylesheet" href="static/style/perfil/styleEditarPerfil.css">
+
+</head>
+
+<body>
+    <div class="site-wrap">
+        <header>
+            <nav class="nav" aria-label="Principal">
+                <a href="/" class="logo" aria-label="Página inicial">
+                    <span>C</span><span>o</span><span>g</span><span>i</span><span>t</span><span
+                        class="underline-o">o</span><span class="highlight-apostrophe">’</span>
+                </a>
+                <div class="grow"></div>
+                <div class="nav-links">
+                    <a class="pill" href="/pagtcc">Posts Acadêmicos</a>
+                    <a class="btn btn-brand" href="/perfil">Perfil</a>
+                </div>
+            </nav>
+        </header>
+
+        <div class="container">
+            <div class="profile-header">
+                <div class="banner"></div>
+                <div class="profile-pic-container">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="profile-info">
+                    <h1 class="profile-name">Giovanna Herek</h1>
+                    <p class="profile-headline">Artista</p>
+                    <p class="profile-location"><i class="fas fa-map-marker-alt"></i> Alto do Ipiranga, São Paulo,
+                        Brasil</p>
+                    <p class="profile-contact"><i class="fas fa-envelope"></i> Informações de contato</p>
+
+                    <div class="action-buttons">
+                        <button class="btn btn-primary"><i class="fas fa-plus"></i> Mensagem</button>
+                        <button class="btn btn-outline">Mais</button>
+                        <button class="btn btn-outline"><i class="fas fa-pencil-alt"></i> 
+                                <a href="/EditarPerfil">Editar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Escrito interesse em:</h2>
+                <ul class="interests-list">
+                    <li class="interest-item">Adicional reção do perfil</li>
+                    <li class="interest-item">Usais</li>
+                    <li class="interest-item">Marketing Digital</li>
+                    <li class="interest-item">Gestão de Processos</li>
+                    <li class="interest-item">Desenvolvimento Pessoal</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Descrição</h2>
+                <ul class="description-list">
+                    <li class="description-item"><i class="fas fa-check-circle"></i>Escreva sua descrição</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Sugestões para você</h2>
+                <ul class="suggestions-list">
+                    <li class="suggestion-item"><i class="fas fa-lightbulb"></i> Faça um post acadêmico</li>
+                </ul>
+            </div>
+
+            <!-- <div class="section">
+            <h2 class="section-title">Iniciativa</h2>
+            <p class="badge-text">Concha a faixa para esforçar o nível da perfil informatizado</p>
+            <div class="badge-section">
+                <i class="fas fa-certificate badge-icon"></i>
+                <p class="badge-text">Adicione uma faixa ao perfil para que reconheçam você. Perfis com faixa são até 3,5 vezes mais visualizados.</p>
+            </div>
+        </div> -->
+
+            <div class="section">
+                <h2 class="section-title">Formação acadêmica</h2>
+                <div class="education-item">
+                    <div class="education-title">Onde se formou</div>
+                    <p class="education-details">Perfis com formação acadêmica são até 2,5 vezes mais visualizados.</p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Experiência profissional</h2>
+                <div class="education-item">
+                    <div class="education-title">Emprego</div>
+                    <p class="education-details">Adicione suas experiências profissionais para aumentar sua
+                        visibilidade.</p>
+                </div>
+            </div>
+
+            <div class="profile-footer">
+                Cogito © 2025 - Página de perfil 
+            </div>
+        </div>
+
+        <script>
+            // Adicionando um efeito sutil de carregamento
+            document.addEventListener('DOMContentLoaded', function () {
+                document.body.classList.add('loaded');
+
+                // Adicionando interatividade aos botões
+                const buttons = document.querySelectorAll('.btn');
+                buttons.forEach(button => {
+                    button.addEventListener('click', function () {
+                        this.style.transform = 'scale(0.98)';
+                        setTimeout(() => {
+                            this.style.transform = '';
+                        }, 150);
+                    });
+                });
+            });
+        </script>
+    </div>
+</body>
+
+</html>
